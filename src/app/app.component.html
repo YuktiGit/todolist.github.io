@@ -1,0 +1,72 @@
+<p>App Component Running....</p>
+
+<!-- <label for="">Task Name</label><input type="text" [(ngModel)]="tName" />
+<label for="">Due date</label><input type="text" [(ngModel)]="tDue" />
+
+<button class="btn btn-primary" (click)="addTask(taskname, tDue)">
+  Add Task
+</button> -->
+<label for="">Task Name</label><input type="text" [(ngModel)]="taskname" />
+<br />
+<br />
+<label for="">Due date</label><input type="text" [(ngModel)]="duedate" /> <br />
+<br />
+<label for="">Details</label><input type="text" [(ngModel)]="tDetail" />
+<br />
+<br />
+<button class="btn btn-primary" (click)="addTask(taskname, duedate, tDetail)">
+  Add Task
+</button>
+<br />
+<br />
+<table class="table table-warning table-stripped">
+  <thead>
+    <tr>
+      <th scope="col">TaskID</th>
+      <th scope="col">Task Name</th>
+      <th scope="col">Due Date</th>
+      <th scope="col">Status</th>
+      <th scope="col">Emoji</th>
+      <th scope="col">Details</th>
+      <th scope="col">Click to Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of taskArr">
+      <th scope="row">{{ i.taskid }}</th>
+      <td>{{ i.taskname }}</td>
+      <td>{{ i.duedate }}</td>
+      <td>{{ i.status }}</td>
+      <!-- <td>{{ i.emoji }}</td>
+      <a href="#" (click)="emojiShow(i.emoji)"> </a>
+      <app-details [tDetail]="i.detail" *ngIf="i.showhide"></app-details> -->
+      <!-- <td *ngIf="i.emoji; else sademoji">
+        <img src="{{ taskEmojihappy }}" alt="Image" />
+        <ng-template #sademoji
+          ><img src="{{ taskEmojisad }}" alt="Image" />
+        </ng-template>
+      </td> -->
+      <td>
+        <ng-template [ngIf]="i.emoji" [ngIfElse]="emoji">
+          <img src="{{ taskEmojihappy }}" alt="Image" />
+        </ng-template>
+
+        <ng-template #emoji>
+          <img src="{{ taskEmojisad }}" alt="Image" />
+        </ng-template>
+      </td>
+      <td>
+        <a href="#" (click)="showHide(i.taskid)">See More</a>
+        <app-details [tDetail]="i.detail" *ngIf="i.showhide"></app-details>
+      </td>
+      <td>
+        <a href="#" (click)="deleteTask(i.taskid)">Delete</a>
+        <!-- <a class="btn" ng-click="remove(item)">Delete</a> -->
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- <a href="#" (click)="deleteTask(i.taskid)"></a> -->
+<!-- <p>{{ message }}</p> -->
+<p><app-details (msgEvent)="receiveMessage($event)"></app-details></p>
+<p>{{ message }}</p>
